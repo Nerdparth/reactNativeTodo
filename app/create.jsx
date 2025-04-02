@@ -1,21 +1,17 @@
 import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { useRouter } from 'expo-router'
-import {useDispatch} from "react-redux"
-import {addTodo} from "../store/todoSlice"
+import {useAddTodo} from "../hooks"
 
 
 const Create = () => {
   const router = useRouter()
-  const dispatch = useDispatch()
   const [title1, setTitle1] = useState('')
   const [content1, setContent1] = useState('')
+  const addTodo = useAddTodo()
   const formHandler = () => {
     if (title1 != '' && content1 != ''){
-    dispatch(addTodo({
-        title : title1,
-        content : content1
-    }))
+    addTodo(title1, content1)
     router.navigate("/")}
     else{
       console.log("empty values given")
